@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LUSI Cafe - Fresh Coffee & Cozy Ambiance</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body, h1, h2, h3, p, ul, li, figure {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background: #f7f2ee;
+      color: #4b3b2b;
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    body.dark {
+      background: #2b2b2b;
+      color: #ddd;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+    }
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+    .container {
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(75, 59, 43, 0.95);
+      backdrop-filter: saturate(180%) blur(10px);
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(75,59,43,0.3);
+    }
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #f3e9dc;
+      background: linear-gradient(135deg, #c19a6b 0%, #7f5539 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      user-select: none;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 32px;
+    }
+    nav li {
+      position: relative;
+    }
+    nav a {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #f3e9dc;
+      padding: 8px 0;
+      transition: color 0.3s ease;
+    }
+    nav a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background: #c19a6b;
+      transition: width 0.3s ease;
+    }
+    nav a:hover, nav a:focus {
+      color: #d1bfa7;
+    }
+    nav a:hover::after, nav a:focus::after {
+      width: 100%;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      width: 28px;
+      height: 24px;
+      justify-content: center;
+    }
+    .hamburger span {
+      background: #f3e9dc;
+      height: 3px;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      background: rgba(75, 59, 43, 0.98);
+      position: fixed;
+      inset: 0;
+      padding-top: 100px;
+      padding-left: 32px;
+      z-index: 999;
+      gap: 24px;
+      transition: transform 0.3s ease;
+      transform: translateX(-100%);
+    }
+    .mobile-nav.show {
+      transform: translateX(0);
+    }
+    .mobile-nav a {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #f3e9dc;
+    }
+    .mobile-nav a:focus, .mobile-nav a:hover {
+      color: #d1bfa7;
+    }
+
+    /* Hero */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 90vh;
+      padding: 48px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background-image: url("https://images.pexels.com/photos/683039/pexels-photo-683039.jpeg?cs=srgb&dl=pexels-apgpotr-683039.jpg&fm=jpg");
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+    }
+    @keyframes gradientShift {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+    .hero h1 {
+      font-size: 3.6rem;
+      font-weight: 900;
+      color: #f3e9dc;
+      margin-bottom: 16px;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
+      animation: fadeSlideDown 1s ease forwards;
+    }
+    .hero p {
+      max-width: 600px;
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: #f3e9dc;
+      margin-bottom: 36px;
+      animation: fadeSlideUp 1s ease forwards;
+      animation-delay: 0.3s;
+      opacity: 0;
+    }
+    .btn-primary {
+      background: #a27b5c;
+      border: none;
+      padding: 16px 48px;
+      border-radius: 24px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #f3e9dc;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(162,123,92, 0.3);
+      transition: background 0.3s ease, transform 0.2s ease;
+      animation: fadeSlideUp 1s ease forwards;
+      animation-delay: 0.6s;
+      opacity: 0;
+    }
+    .btn-primary:hover,
+    .btn-primary:focus {
+      background: #7f5f3e;
+      outline: none;
+      transform: scale(1.05);
+      box-shadow: 0 12px 28px rgba(127,95,62, 0.5);
+    }
+    @keyframes fadeSlideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    section {
+      padding: 64px 24px;
+    }
+    h2.section-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 48px;
+      letter-spacing: 0.04em;
+      color: #6c4a37;
+      text-align: center;
+    }
+
+
+
+/* About Section */
+  .about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .about-text h3 {
+    font-size: 2rem;
+    color: #7f6341;
+    margin-bottom: 24px;
+    font-weight: 700;
+  }
+  .about-text p {
+    font-size: 1.1rem;
+    color: #4b3b2b;
+    margin-bottom: 16px;
+  }
+  .about-image {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(75,59,43,0.15);
+    animation: floatUp 4s ease-in-out infinite alternate;
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(0);}
+    100% { transform: translateY(-20px);}
+  }
+
+
+    /* Menu Section */
+    .filter-buttons {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .filter-buttons button {
+      padding: 10px 20px;
+      margin: 0 10px;
+      border: none;
+      background: #a27b5c;
+      color: #f3e9dc;
+      cursor: pointer;
+      border-radius: 20px;
+      transition: background 0.3s ease;
+    }
+    .filter-buttons button.active {
+      background: #7f5539;
+    }
+
+    .menu-grid {
+      display: grid;
+      gap: 36px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .menu-card {
+      background: #f3e9dc;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(162, 123, 92, 0.2);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .menu-card.hidden {
+      display: none;
+    }
+    .menu-card:hover, .menu-card:focus-within {
+      transform: translateY(-12px);
+      box-shadow: 0 16px 48px rgba(162, 123, 92, 0.4);
+    }
+    .menu-card img {
+      border-radius: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(127, 95, 62, 0.15);
+    }
+    .menu-card h4 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #6c4a37;
+    }
+    .menu-card p {
+      color: #6c4a37;
+      font-size: 1rem;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    .menu-price {
+      font-weight: 700;
+      color: #7f5f3e;
+      font-size: 1.1rem;
+    }
+
+    /* Drink Recommender section */
+    .recommender {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 24px;
+      background: #eae0d5;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(162,123,92,0.2);
+    }
+    .recommender.dark {
+      background: #444;
+      color: #ddd;
+    }
+    .recommender select, .recommender input, .recommender button {
+      padding: 10px;
+      font-size: 1rem;
+      margin: 10px;
+      border-radius: 8px;
+      border: 1px solid #7f5539;
+    }
+    .recommender button {
+      background: #7f5539;
+      color: #f3e9dc;
+      border: none;
+      cursor: pointer;
+    }
+    .recommender button:hover {
+      background: #a27b5c;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .about-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .about-image {
+        margin: 24px 0 0;
+      }
+      .menu-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+    }
+    @media (max-width: 640px) {
+      nav ul {
+        display: none;
+      }
+      .hamburger {
+        display: flex;
+      }
+      section {
+        padding: 48px 16px;
+      }
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+      .hero p {
+        font-size: 1.1rem;
+      }
+      .btn-primary {
+        padding: 14px 28px;
+        font-size: 1.1rem;
+      }
+    }
+
+
+
+
+
+/* Cafe Recommendations */
+#recommendations {
+  padding: 60px 20px;
+  text-align: center;
+  background: var(--bg-color, #fafafa);
+  transition: background 0.3s, color 0.3s;
+}
+
+.recommendation-box {
+  max-width: 450px;
+  margin: 30px auto;
+  padding: 25px;
+  border-radius: 15px;
+  background: var(--card-bg, #fff);
+  color: var(--text-color, #333);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+  transition: background 0.3s, color 0.3s;
+}
+
+#recommendations select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  margin: 15px 0;
+}
+
+#recommendations button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent-color, #ff6347);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s, transform 0.2s;
+}
+#recommendations button:hover {
+  background: #e5533d;
+  transform: scale(1.05);
+}
+
+#drinkResult {
+  margin-top: 18px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  min-height: 26px;
+}
+
+/* Dark mode compatibility */
+body.dark #recommendations {
+  background: #121212;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Gallery Section */
+  .gallery-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .gallery-item {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(111, 97, 82, 0.15);
+    cursor: pointer;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .gallery-item img {
+    border-radius: 16px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .gallery-item:hover, .gallery-item:focus-within {
+    transform: scale(1.05);
+    box-shadow: 0 16px 48px rgba(111, 97, 82, 0.35);
+    z-index: 10;
+  }
+  .gallery-item:hover img, .gallery-item:focus-within img {
+    transform: scale(1.1);
+  }
+
+
+
+/* General container */
+.recommendation-box {
+  max-width: 400px;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 12px;
+  background: var(--card-bg, #fff);
+  color: var(--text-color, #333);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* Dropdown */
+#moodSelect {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 100%;
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+/* Button */
+#getDrink, #modeToggle {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent-color, #ff6347);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 5px;
+  transition: background 0.3s, transform 0.2s;
+}
+#getDrink:hover, #modeToggle:hover {
+  background: #e5533d;
+  transform: scale(1.05);
+}
+
+/* Result text */
+#drinkResult {
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  min-height: 24px; /* to keep space reserved */
+}
+
+/* Dark mode styling */
+body.dark {
+  --card-bg: #1e1e1e;
+  --text-color: #fff;
+  --accent-color: #ff9800;
+  background: #121212;
+  color: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Cafe Recommendations */
+#recommendations {
+  padding: 60px 20px;
+  text-align: center;
+  background: var(--bg-color, #fafafa);
+  transition: background 0.3s, color 0.3s;
+}
+
+.recommendation-box {
+  max-width: 450px;
+  margin: 30px auto;
+  padding: 25px;
+  border-radius: 15px;
+  background: var(--card-bg, #fff);
+  color: var(--text-color, #333);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+  transition: background 0.3s, color 0.3s;
+}
+
+#recommendations select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  margin: 15px 0;
+}
+
+#recommendations button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent-color, #ff6347);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s, transform 0.2s;
+}
+#recommendations button:hover {
+  background: #e5533d;
+  transform: scale(1.05);
+}
+
+#drinkResult {
+  margin-top: 18px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  min-height: 26px;
+}
+
+/* Dark mode compatibility */
+body.dark #recommendations {
+  background: #121212;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* Contact Section */
+  .contact-form-container {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    background: #f3e9dc;
+    padding: 48px 36px;
+    border-radius: 24px;
+    box-shadow: 0 12px 36px rgba(162, 123, 92, 0.25);
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  label {
+    font-weight: 700;
+    color: #6c4a37;
+    font-size: 1rem;
+    display: block;
+    margin-bottom: 6px;
+  }
+  input, textarea {
+    width: 100%;
+    padding: 14px 20px;
+    border: 2px solid #a27b5c;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: inherit;
+    resize: vertical;
+    transition: border-color 0.3s ease;
+  }
+  input:focus, textarea:focus {
+    border-color: #7f5539;
+    outline: none;
+    box-shadow: 0 0 10px rgba(127,85,57,0.3);
+  }
+  .error-message {
+    color: #c04a3a;
+    font-size: 0.9rem;
+    height: 18px;
+  }
+  button[type="submit"] {
+    background: #7f5539;
+    color: #f3e9dc;
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 16px 0;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(127, 85, 57, 0.4);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  button[type="submit"]:hover,
+  button[type="submit"]:focus {
+    background-color: #6c4a37;
+    outline: none;
+    transform: scale(1.05);
+  }
+
+  /* Footer */
+  footer {
+    background: #4b3b2b;
+    color: #f3e9dc;
+    padding: 32px 24px;
+    text-align: center;
+    font-size: 0.95rem;
+  }
+  .footer-social {
+    margin-bottom: 16px;
+  }
+  .footer-social a {
+    color: #f3e9dc;
+    font-size: 1.6rem;
+    margin: 0 12px;
+    transition: color 0.3s ease;
+  }
+  .footer-social a:hover,
+  .footer-social a:focus {
+    color: #c19a6b;
+    outline: none;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .about-content {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    .about-image {
+      margin: 24px 0 0;
+    }
+    .menu-grid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+  }
+  @media (max-width: 640px) {
+    nav ul {
+      display: none;
+    }
+    .hamburger {
+      display: flex;
+    }
+    section {
+      padding: 48px 16px;
+    }
+    .hero h1 {
+      font-size: 2.4rem;
+    }
+    .hero p {
+      font-size: 1.1rem;
+    }
+    .btn-primary {
+      padding: 14px 28px;
+      font-size: 1.1rem;
+    }
+  }
+
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-container">
+      <a href="#" class="logo" aria-label="Artisan Cafe Home">LUSI CAFE</a>
+      <nav>
+        <ul>
+          <li><a href="#about" tabindex="0">About</a></li>
+          <li><a href="#menu" tabindex="0">Menu</a></li>
+          <li><a href="#gallery" tabindex="0">Gallery</a></li>
+          <li><a href="#drink" tabindex="0">Recommender</a></li>
+          <li><a href="#contact" tabindex="0">Contact</a></li>
+        </ul>
+      </nav>
+              <span></span><span></span><span></span>
+      </button>
+
+
+    </div>    <nav id="mobile-menu" class="mobile-nav" aria-hidden="true">
+      <a href="#about" tabindex="-1">About</a>
+      <a href="#menu" tabindex="-1">Menu</a>
+      <a href="#gallery" tabindex="-1">Gallery</a>
+      <a href="#drink" tabindex="-1">Recommender</a>
+      <a href="#contact" tabindex="-1">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" role="banner" aria-label="Welcome to LUSI CAFE">
+      <h1>Welcome to LUSI CAFE</h1>
+      <p>"Flaky, buttery, and irresistibly fresh—discover the art of pastry perfection."</p>
+      <button class="btn-primary" onclick="scrollToMenu()">View Our Menu</button>
+    </section>
+
+     <section id="about" aria-label="About LUSI CAFE">
+      <h2 class="section-title">About Us</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <h3>Our Story</h3>
+          <p>At LUSI CAFE, we believe in the art of coffee. Our beans are ethically sourced from small farms and roasted daily to bring you unparalleled freshness and flavor.</p>
+          <p>Our cozy space invites you to relax, connect, and savor every sip. From expertly crafted espresso drinks to delicious pastries, we aim to delight every sense.</p>
+        </div>
+        <div class="about-image" aria-hidden="true">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3c9f9902-d356-47e3-809c-41d80df7c43c.png" alt="Cozy cafe interior with wooden furniture, green plants, and warm lighting that creates an inviting atmosphere" />
+        </div>
+      </div>
+    </section>
+
+    <section id="menu" aria-label="Cafe Menu">
+      <h2 class="section-title">Our Menu</h2>
+      <div class="filter-buttons">
+        <button class="active" data-filter="all">All</button>
+        <button data-filter="coffee">Coffee</button>
+        <button data-filter="pastry">Pastry</button>
+        <button data-filter="keto">Keto</button>
+      </div>
+      <div class="menu-grid">
+        <!-- Coffee items -->
+        <article class="menu-card" data-category="coffee">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/49f3912c-bd94-4108-9a44-f2634173fa74.png" alt="Freshly brewed espresso" />
+          <h4>Classic Espresso</h4>
+          <p>Bold and aromatic espresso shot crafted from fresh house-roasted beans.</p>
+          <p class="menu-price">₹450.00</p>
+        </article>
+        <article class="menu-card" data-category="coffee">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b8eda6bb-60ed-433d-8730-53ff0844d94d.png" alt="Velvety Latte" />
+          <h4>Velvety Latte</h4>
+          <p>Smooth espresso with steamed milk and a touch of foam for a creamy delight.</p>
+          <p class="menu-price">₹550.00</p>
+        </article>
+        <!-- Pastry items -->
+        <article class="menu-card" data-category="pastry">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1d012586-a13a-4978-8e90-1cf52d3bc31d.png" alt="Fresh Croissant" />
+          <h4>Fresh Croissant</h4>
+          <p>Buttery, flaky croissant baked fresh daily, perfect alongside your coffee.</p>
+          <p class="menu-price">₹200.00</p>
+        </article>
+
+<article class="menu-card" data-category="pastry">
+          <img src="https://cheeseknees.com/wp-content/uploads/2022/09/Homemade-Puff-Pastry-sq.jpg" alt="Puff pastry" />
+          <h4>Puff pastry</h4>
+          <p>Buttery, flaky croissant baked fresh daily, perfect alongside your coffee.</p>
+          <p class="menu-price">₹350.00</p>
+        </article>
+
+
+        <!-- Keto items -->
+        <article class="menu-card" data-category="keto">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2886511b-4fb9-42b1-86dc-43f10b9d35e4.png" alt="Keto-friendly snack box" />
+          <h4>Keto Snack Box</h4>
+          <p>Low-carb snack box with nuts, seeds, and dark chocolate – guilt-free indulgence.</p>
+          <p class="menu-price">₹600.00</p>
+        </article>
+
+<article class="menu-card" data-category="keto">
+          <img src="https://s3-media0.fl.yelpcdn.com/bphoto/TlAuzEmkqYzYiwfCYu2xvA/348s.jpg" alt="Rice Bar" />
+          <h4>Rice Bar</h4>
+          <p>Combination of rice with nuts, seeds, and dark chocolate – delicious pudding.</p>
+          <p class="menu-price">₹450.00</p>
+        </article>
+
+
+        <!-- add more as needed -->
+      </div>
+    </section>
+
+   
+
+
+
+
+
+    <section id="gallery" aria-label="Gallery of Artisan Cafe">
+      <h2 class="section-title">Gallery</h2>
+      <div class="gallery-grid">
+        <figure class="gallery-item" tabindex="0">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b702aeab-102b-4eb4-96b7-838c463924b3.png" alt="Close-up of intricate latte art in a warm ceramic cup placed on a wooden table" />
+        </figure>
+        <figure class="gallery-item" tabindex="0">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b246fce6-bc01-4ac0-b565-73a0a2504191.png" alt="Roasted coffee beans scattered on a burlap sack illuminated with natural light" />
+        </figure>
+        <figure class="gallery-item" tabindex="0">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/906066a5-b5cc-4417-a414-17c9560b356d.png" alt="Selection of colorful artisan pastries displayed attractively on a white platter" />
+        </figure>
+        <!-- more if needed -->
+      </div>
+    </section>
+
+
+
+
+
+
+
+
+<!-- Cafe Recommendations Section -->
+<section id="recommendations" aria-label="Cafe Recommendations">
+  <h2 class="section-title">Cafe Recommendations Based on Your Feelings</h2>
+  
+  <div class="recommendation-box">
+    <p>How are you feeling today? Pick your mood, and we'll suggest the perfect drink ☕</p>
+    
+    <select id="moodSelect">
+      <option value="">-- Select Your Mood --</option>
+      <option value="happy">😊 Happy</option>
+      <option value="tired">😴 Tired</option>
+      <option value="chilly">🥶 Chilly</option>
+      <option value="adventurous">🤩 Adventurous</option>
+      <option value="stressed">😓 Stressed</option>
+      <option value="romantic">💕 Romantic</option>
+    </select>
+    
+    <button id="getDrink">Get Recommendation</button>
+    <p id="drinkResult"></p>
+  </div>
+</section>
+
+<!-- Inline Styling + Script -->
+<style>
+  /* Cafe Recommendations */
+  #recommendations {
+    padding: 60px 20px;
+    text-align: center;
+    background: var(--bg-color, #fafafa);
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .recommendation-box {
+    max-width: 450px;
+    margin: 30px auto;
+    padding: 25px;
+    border-radius: 15px;
+    background: var(--card-bg, #fff);
+    color: var(--text-color, #333);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    transition: background 0.3s, color 0.3s;
+  }
+
+  #recommendations select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    margin: 15px 0;
+  }
+
+  #recommendations button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    background: var(--accent-color, #ff6347);
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s, transform 0.2s;
+  }
+  #recommendations button:hover {
+    background: #e5533d;
+    transform: scale(1.05);
+  }
+
+  #drinkResult {
+    margin-top: 18px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    min-height: 26px;
+  }
+
+  /* Dark mode compatibility */
+  body.dark #recommendations {
+    background: #121212;
+  }
+</style>
+
+<script>
+  // Cafe Drink Recommendations
+  const moodSelect = document.getElementById('moodSelect');
+  const getDrinkBtn = document.getElementById('getDrink');
+  const drinkResult = document.getElementById('drinkResult');
+
+  const drinkMap = {
+    happy: "Caramel Frappuccino – sweet like your mood! 😍",
+    tired: "Classic Espresso – a strong wake-up shot! ⚡",
+    chilly: "Hot Chocolate – warm & cozy comfort. ☕",
+    adventurous: "Specialty Cold Brew with unique flavors 🌍",
+    stressed: "Calming Herbal Tea – relax and breathe 🌿",
+    romantic: "Strawberry Mocha – sweet and lovely ❤️"
+  };
+
+  getDrinkBtn.addEventListener('click', () => {
+    const mood = moodSelect.value;
+    if (!mood) {
+      drinkResult.textContent = "Please choose your mood above 🙂";
+    } else {
+      drinkResult.textContent = `Since you're feeling ${mood}, we recommend: ${drinkMap[mood]}`;
+    }
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+
+    <section id="contact" aria-label="Contact Artisan Cafe">
+      <h2 class="section-title">Contact Us</h2>
+      <div class="contact-form-container">
+        <form id="contactForm" novalidate>
+          <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required aria-required="true"
+                   aria-describedby="nameError" placeholder="Your full name" />
+            <div class="error-message" id="nameError" aria-live="polite"></div>
+          </div>
+          <div>
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required aria-required="true"
+                   aria-describedby="emailError" placeholder="you@example.com" />
+            <div class="error-message" id="emailError" aria-live="polite"></div>
+          </div>
+          <div>
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required aria-required="true"
+                      aria-describedby="messageError" placeholder="Write your message here"></textarea>
+            <div class="error-message" id="messageError" aria-live="polite"></div>
+          </div>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-social" aria-label="Social Media Links">
+      <a href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
+      <a href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+      <a href="https://twitter.com" aria-label="Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+    </div>
+    <p>© 2024 LUSI Cafe. All rights reserved.</p>
+  </footer>
+
+ 
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+        
+   
+
+    
+
+</body>
+</html>
